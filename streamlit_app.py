@@ -33,7 +33,27 @@ st.write("## Your additions")
 
 categories = df['Category'].unique()
 selected_category = st.selectbox('Select a Category', categories)
-                                 
+
+sub_categories = df[df['Category'] == selected_category]['Sub-Category'].unique()
+selected_sub_categories = sf.multiselect('Select Sub-Categories', subcategories)
+
+filtered_df = df[(df['Category'] == selected_category) & (df['Sub-Category'].isin(selected_sub_categories))]
+
+if not filtered_df.empty:
+    total_sales = filtered_df['Sales'].sum()
+    total_profit = filtered_df['Profit'].sum()
+    profit_margin = (total_profit / total_sales) * 100
+
+    st.metric("Total Sales", f"${total_sales:,.2f}")
+    st.metric("Total Profit", f"${total_profit:,.2f}")
+
+overall_profit_margin = (df['Profit'].sum() / df['Sales'].sum()) * 100
+    delta = profit_margin - overall_profit_margin
+
+    st.metric("Overall Profit Margin", f"{profit_margin:.2f}%", f"{delta:.2f}%")
+else:
+    st.write("No data available to calculate metrics.")
+  
 st.write("### (1) add a drop down for Category (https://docs.streamlit.io/library/api-reference/widgets/st.selectbox)")
 st.write("### (2) add a multi-select for Sub_Category *in the selected Category (1)* (https://docs.streamlit.io/library/api-reference/widgets/st.multiselect)")
 st.write("### (3) show a line chart of sales for the selected items in (2)")
