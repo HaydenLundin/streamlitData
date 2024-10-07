@@ -34,10 +34,10 @@ st.write("## Your additions")
 categories = df['Category'].unique()
 selected_category = st.selectbox('Select a Category', categories)
 
-sub_categories = df[df['Category'] == selected_category]['Sub-Category'].unique()
+sub_categories = df[df['Category'] == selected_category]['Sub_Category'].unique()
 selected_sub_categories = sf.multiselect('Select Sub-Categories', subcategories)
 
-filtered_df = df[(df['Category'] == selected_category) & (df['Sub-Category'].isin(selected_sub_categories))]
+filtered_df = df[(df['Category'] == selected_category) & (df['Sub_Category'].isin(selected_sub_categories))]
 
 if not filtered_df.empty:
     total_sales = filtered_df['Sales'].sum()
