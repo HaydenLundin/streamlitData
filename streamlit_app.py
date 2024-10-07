@@ -48,7 +48,7 @@ if not filtered_df.empty:
     st.metric("Total Profit", f"${total_profit:,.2f}")
 
 overall_profit_margin = (df['Profit'].sum() / df['Sales'].sum()) * 100
-    delta = profit_margin - overall_profit_margin
+delta = profit_margin - overall_profit_margin
 
     st.metric("Overall Profit Margin", f"{profit_margin:.2f}%", f"{delta:.2f}%")
 else:
