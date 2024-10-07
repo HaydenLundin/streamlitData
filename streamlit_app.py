@@ -42,7 +42,7 @@ filtered_df = df[(df['Category'] == selected_category) & (df['Sub_Category'].isi
 if not filtered_df.empty:
         sales_by_month = filtered_df.resample('M')['Sales'].sum()
         st.line_chart(sales_by_month)
-    else:
+else:
         st.write(f"No data available for the selected category and {sub_category_col}s.")
         
 if not filtered_df.empty:
