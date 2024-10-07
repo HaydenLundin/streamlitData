@@ -40,6 +40,12 @@ selected_sub_categories = st.multiselect('Select Sub-Categories', sub_categories
 filtered_df = df[(df['Category'] == selected_category) & (df['Sub_Category'].isin(selected_sub_categories))]
 
 if not filtered_df.empty:
+        sales_by_month = filtered_df.resample('M')['Sales'].sum()
+        st.line_chart(sales_by_month)
+    else:
+        st.write(f"No data available for the selected category and {sub_category_col}s.")
+        
+if not filtered_df.empty:
     total_sales = filtered_df['Sales'].sum()
     total_profit = filtered_df['Profit'].sum()
     profit_margin = (total_profit / total_sales) * 100
